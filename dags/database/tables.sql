@@ -110,9 +110,9 @@ CREATE TABLE IF NOT EXISTS `me_etl`.`routes` (
   `methods` TEXT NOT NULL,
   `paths` TEXT NOT NULL,
   `protocols` TEXT NOT NULL,
-  `preserve_host` TINYINT(1) NOT NULL,
+  `preserve_host` VARCHAR(10) NULL,
   `regex_priority` INT NOT NULL,
-  `strip_path` TINYINT(1) NOT NULL,
+  `strip_path` VARCHAR(10) NULL,
   `created_at` VARCHAR(191) NOT NULL,
   `updated_at` VARCHAR(191) NOT NULL,
   `services_id` VARCHAR(191) NOT NULL,
@@ -136,7 +136,7 @@ ENGINE = InnoDB;
 -- Table `me_etl`.`process`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `me_etl`.`process` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `upstream_uri_id` VARCHAR(191) NOT NULL,
   `client_ip` VARCHAR(45) NOT NULL,
   `started_at` VARCHAR(191) NOT NULL,

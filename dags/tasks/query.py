@@ -34,7 +34,7 @@ def query(cursor, db, count, headers, request, response, consumer, service, rout
         data = "', '".join(consumer)
         sql = "INSERT INTO consumer (id) values (' " + data + " ');"
         cursor.execute(sql)
-        consumer_id = db.insert_id()
+        consumer_id = data
 
         # latencies table
         columns = ", ".join(column_latencies)
@@ -54,11 +54,25 @@ def query(cursor, db, count, headers, request, response, consumer, service, rout
         route.append(str(services_id))
 
         # routes table
+        route_id = route[2]
         columns = ", ".join(column_route)
         data = "', '".join(route)
         sql = "INSERT INTO routes (" + columns + ") values (' " + data + " ');"
         cursor.execute(sql)
-        services_id = db.insert_id()
+
+
+        process.append(str(request_id))
+        process.append(str(response_id))
+        process.append(str(consumer_id))
+        process.append(str(route_id))
+        process.append(str(latencies_id))
+
+
+        # process table
+        columns = ", ".join(column_process)
+        data = "', '".join(process)
+        sql = "INSERT INTO process (" + columns + ") values (' " + data + " ');"
+        cursor.execute(sql)
 
         db.commit()
 

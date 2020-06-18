@@ -45,7 +45,7 @@ def read_and_store_files(**context):
                 column_service = ['connect_timeout','created_at','host', 'id', 'name', 'path', 'port', 'protocol', 'read_timeout', 'retries', 'updated_at', 'write_timeout']
                 column_route = ['created_at','hosts','id', 'methods', 'paths', 'preserve_host', 'protocols', 'regex_priority', 'strip_path', 'updated_at', 'services_id']
                 column_latencies = ['proxy', 'kong', 'request']
-                column_process = ['upstream_uri_id', 'client_ip', 'started_at']
+                column_process = ['upstream_uri_id', 'client_ip', 'started_at', 'requests_id', 'response_id', 'consumer_id', 'routes_id', 'latencies_id']
 
                 line = opened_file.readline().split()
 
@@ -110,5 +110,9 @@ def read_and_store_files(**context):
                     if res == True:
                         latencies.append(str(line["latencies"][attribute]))
 
+                process.append(str(line["upstream_uri"]))
+                process.append(str(line["client_ip"]))
+                process.append(str(line["started_at"]))
+                
                 query.query(cursor, db, count, headers, request, response, consumer, service, route, latencies, process, column_headers, column_request, column_response, column_consumer, column_service, column_route, column_latencies, column_process)
     return None
