@@ -95,9 +95,9 @@ CREATE TABLE IF NOT EXISTS `me_etl`.`services` (
   `read_timeout` INT NOT NULL,
   `retries` INT NOT NULL,
   `write_timeout` INT NOT NULL,
-  `created_at` DATETIME NOT NULL,
-  `updated_at` DATETIME NOT NULL,
-  PRIMARY KEY (`id`))
+  `created_at` VARCHAR(191) NOT NULL,
+  `updated_at` VARCHAR(191) NOT NULL
+)
 ENGINE = InnoDB;
 
 
@@ -113,16 +113,10 @@ CREATE TABLE IF NOT EXISTS `me_etl`.`routes` (
   `preserve_host` TINYINT(1) NOT NULL,
   `regex_priority` INT NOT NULL,
   `strip_path` TINYINT(1) NOT NULL,
-  `created_at` DATETIME NOT NULL,
-  `updated_at` DATETIME NOT NULL,
+  `created_at` VARCHAR(191) NOT NULL,
+  `updated_at` VARCHAR(191) NOT NULL,
   `services_id` VARCHAR(191) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_routes_services1_idx` (`services_id` ASC),
-  CONSTRAINT `fk_routes_services1`
-    FOREIGN KEY (`services_id`)
-    REFERENCES `me_etl`.`services` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -145,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `me_etl`.`process` (
   `id` INT NOT NULL,
   `upstream_uri_id` VARCHAR(191) NOT NULL,
   `client_ip` VARCHAR(45) NOT NULL,
-  `started_at` DATETIME NOT NULL,
+  `started_at` VARCHAR(191) NOT NULL,
   `requests_id` INT NOT NULL,
   `response_id` INT NOT NULL,
   `consumer_id` VARCHAR(191) NOT NULL,
