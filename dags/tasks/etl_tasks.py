@@ -15,7 +15,7 @@ def read_and_store_files(**context):
     logging.info('Reading Input Files')
     files = gl.glob('./dags/data/*')
 
-    db = mysqldb.connect("172.19.0.3","root","password","me_etl")
+    db = mysqldb.connect("172.19.0.2","root","password","me_etl")
     cursor = db.cursor()
 
     entries = []
@@ -113,6 +113,6 @@ def read_and_store_files(**context):
                 process.append(str(line["upstream_uri"]))
                 process.append(str(line["client_ip"]))
                 process.append(str(line["started_at"]))
-                
+
                 query.query(cursor, db, count, headers, request, response, consumer, service, route, latencies, process, column_headers, column_request, column_response, column_consumer, column_service, column_route, column_latencies, column_process)
     return None

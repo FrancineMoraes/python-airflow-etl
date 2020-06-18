@@ -1,6 +1,5 @@
 import airflow
 from tasks import etl_tasks
-from database import migration
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
@@ -17,19 +16,7 @@ dag = DAG(
     schedule_interval=None
 )
 
-migrate = DAG(
-    dag_id='migrate',
-    default_args=args,
-    schedule_interval=None
-)
-
 with dag:
-    migration = PythonOperator(
-        task_id='migrate_tables',
-        python_callable=migration.migrate,
-        provide_context=True,
-        dag=migrate
-    )
 
     extract_data = PythonOperator(
         task_id='extract_data_from_files',
@@ -37,5 +24,3 @@ with dag:
         provide_context=True,
         dag=dag
     )
-
-# migrate >> extract_data
