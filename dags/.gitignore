@@ -1,0 +1,9 @@
+logs/
+.idea/
+dags/__pycache__/
+database/__pycache__/
+tasks/__pycache__/
+airflow.cfg
+airflow.db
+unittests.cfg
+airflow-webserver.pid
